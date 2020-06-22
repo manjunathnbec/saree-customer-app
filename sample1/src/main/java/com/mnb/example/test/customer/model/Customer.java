@@ -1,4 +1,4 @@
-package com.mnb.example.test.hospital.model;
+package com.mnb.example.test.customer.model;
 
 import lombok.*;
 
@@ -13,14 +13,14 @@ import javax.persistence.Id;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Patient {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long patientId;
+    private Long customerID;
     private String name;
     private String phone;
 
-    public Patient(String name, String ph) {
+    public Customer(String name, String ph) {
         this.name = name;
         this.phone = ph;
     }
