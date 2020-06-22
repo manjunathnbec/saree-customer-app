@@ -18,7 +18,7 @@ public class TransactionController {
         return  transactionService.findAll();
     }
 
-    @PostMapping(value = "/transaction/add" , produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add" , produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public TransactionInfo addTransaction(@RequestBody TransactionInfo transactionInfo){
         //TODO : Add assertions to validate the input
         return transactionService.save(transactionInfo);

@@ -7,6 +7,8 @@ import com.mnb.example.test.customer.repository.ITransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,8 +24,8 @@ public class CustomerTransactionService {
         return transactionRepository.findAll();
     }
 
+    @Transactional
     public TransactionInfo save(TransactionInfo transactionInfo) {
-        TransactionInfo txnInfo = transactionRepository.save(transactionInfo);
         Optional<Customer> customer = customerRepository.findById(transactionInfo.getCustomerId());
         if(customer.isPresent()){
             double balance = customer.get().getBalance();
@@ -33,6 +35,7 @@ public class CustomerTransactionService {
             Customer updatedCustomer = customerRepository.save(customer.get());
             //print the log
         }
+        TransactionInfo txnInfo = transactionRepository.save(transactionInfo);
         return txnInfo;
     }
 
