@@ -25,7 +25,7 @@ public class CustomerController {
         return  customerTransactionService.findAllCustomers();
     }
 
-    @GetMapping(value = "/customer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer getCustomerById(@PathVariable long id){
         return (Customer) customerTransactionService.findCustomerById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer Not in DB"));
     }
@@ -34,7 +34,7 @@ public class CustomerController {
     public Iterable<TransactionInfo> getTransactionsForCustomer(@PathVariable long customerId){
         return  customerTransactionService.findAllTransactionsForCustomer(customerId);
     }
-    @PostMapping(value="/customers/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Customer addCustomer(@RequestBody Customer customer){
         return customerTransactionService.saveCustomer(customer);
     }
