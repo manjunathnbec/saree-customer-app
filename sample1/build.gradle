@@ -2,10 +2,11 @@ plugins {
 	id 'org.springframework.boot' version '2.3.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'com.palantir.docker' version '0.21.0'
 }
 
 group = 'com.mnb.example.test'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -25,6 +26,12 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+docker {
+	name "${project.name}:${project.version}"
+	files "$buildDir/libs/${project.name}-${project.version}.jar"
+	buildArgs(['JAR_FILE': "${project.name}-${project.version}.jar", 'APP': "${project.name}", 'VERSION': "${project.version}"])
 }
 
 test {
