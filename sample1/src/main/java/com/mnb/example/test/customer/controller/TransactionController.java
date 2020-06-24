@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController {
 
     @Autowired
-    private CustomerTransactionService transactionService;
+    private CustomerTransactionService customerTransactionService;
 
-    @GetMapping(value = "/transactions" , produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all" , produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<TransactionInfo> getTransactions(){
-        return  transactionService.findAll();
+        return  customerTransactionService.findAllTransactions();
     }
 
     @PostMapping(value = "/add" , produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public TransactionInfo addTransaction(@RequestBody TransactionInfo transactionInfo){
         //TODO : Add assertions to validate the input
-        return transactionService.save(transactionInfo);
+        return customerTransactionService.saveTransaction(transactionInfo);
     }
 
 }

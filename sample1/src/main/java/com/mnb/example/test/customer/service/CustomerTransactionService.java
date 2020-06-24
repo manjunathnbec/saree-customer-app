@@ -17,16 +17,17 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerTransactionService {
     @Autowired
-    private ITransactionRepository transactionRepository;
+    private  ITransactionRepository transactionRepository;
     @Autowired
-    private ICustomerRepository customerRepository;
+    private  ICustomerRepository customerRepository;
 
-    public Iterable<TransactionInfo> findAll() {
+
+    public Iterable<TransactionInfo> findAllTransactions() {
         return transactionRepository.findAll();
     }
 
     @Transactional
-    public TransactionInfo save(TransactionInfo transactionInfo) {
+    public TransactionInfo saveTransaction(TransactionInfo transactionInfo) {
 
         Optional<Customer> customer = customerRepository.findById(transactionInfo.getCustomerId());
         if(customer.isPresent()){

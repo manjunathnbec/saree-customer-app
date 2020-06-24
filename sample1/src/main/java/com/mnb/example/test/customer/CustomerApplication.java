@@ -27,11 +27,11 @@ public class CustomerApplication {
 			customerRepository.save(new Customer("Nath", "34348787", "xyz",0));
 			customerRepository.save(new Customer("Anu", "32424324", "abcxyz",0));
 
-			transactionService.save(
+			transactionService.saveTransaction(
 					new TransactionInfo(LocalDate.now(), 1, 100.0, "sareee 1", 50));
-			transactionService.save(
+			transactionService.saveTransaction(
 					new TransactionInfo(LocalDate.now(), 2, 120.0, "sareee 2", 70));
-			transactionService.save(
+			transactionService.saveTransaction(
 					new TransactionInfo(LocalDate.now(), 1, 90.0, "sareee 3", 0));
 		};
 	}

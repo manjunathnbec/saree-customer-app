@@ -20,7 +20,7 @@ public class CustomerController {
     @Autowired
     private CustomerTransactionService customerTransactionService;
 
-    @GetMapping(value="/customers" , produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/all" , produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Customer> getAllCustomers(){
         return  customerTransactionService.findAllCustomers();
     }
