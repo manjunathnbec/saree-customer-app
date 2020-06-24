@@ -2,9 +2,12 @@ package com.mnb.example.test.customer
 
 import com.mnb.example.test.customer.controller.CustomerController
 import com.mnb.example.test.customer.model.Customer
+import com.mnb.example.test.customer.model.TransactionInfo
 import com.mnb.example.test.customer.service.CustomerTransactionService
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
+
+import java.time.LocalDate
 
 @SpringBootTest
 class CustomerControllerSpec extends  Specification {
@@ -91,5 +94,34 @@ class CustomerControllerSpec extends  Specification {
         Iterable<Customer> res = customerController.getAllCustomers()
         then:
         assert res.size() == customerList.size()
+    }
+
+
+    def "test get txn for customer" () {
+        given: "test txn data of customer"
+
+        Customer c = new Customer();
+        c.setCustomerID(1)
+        c.setAddress("abc")
+        c.setBalance(20.0)
+        c.setName("mnb")
+        c.setPhone("9632332322")
+
+        TransactionInfo t1 = new TransactionInfo();
+        t1.transactionId = 1
+        t1.transactionDetails = "abc"
+        t1.transactionAmount = 22.0
+        t1.amountPaid = 10.0
+        t1.customerId = 1
+        t1.date = LocalDate.now()
+
+        Iterable<TransactionInfo> transactionInfos = new ArrayList<>()
+        transactionInfos.add(t1)
+
+        customerTransactionService.findAllTransactionsForCustomer(_ as Long) >> transactionInfos
+        when:
+        Iterable<TransactionInfo> res = customerController.getTransactionsForCustomer(1)
+        then:
+        assert res.size() == transactionInfos.size()
     }
 }
