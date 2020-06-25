@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id 'com.palantir.docker' version '0.21.0'
+	id 'com.palantir.docker-run' version '0.21.0'
 	id 'groovy'
 
 }
@@ -32,10 +33,17 @@ dependencies {
 
 docker {
 	name "${project.name}:${project.version}"
-	files "$buildDir/libs/${project.name}-${project.version}.jar"
-	buildArgs(['JAR_FILE': "${project.name}-${project.version}.jar", 'APP': "${project.name}", 'VERSION': "${project.version}"])
+	files "build/libs/${bootJar.archiveFileName.get()}"
+	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
 }
 
 
+dockerRun{
+	name "${project.name}"
+	image "${project.name}:${project.version}"
+	ports '8081:8081'
+	clean true
+	daemonize false
+}
 
 
