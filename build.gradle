@@ -9,12 +9,17 @@ plugins {
 }
 
 group = 'com.mnb.example.test'
-version = '0.0.2-SNAPSHOT'
+version = '0.0.6-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	//maven { url 'https://repo.spring.io/milestone' }
 }
+
+/*ext {
+	set('springCloudVersion', "Hoxton.SR3")
+}*/
 
 dependencies {
 
@@ -31,8 +36,16 @@ dependencies {
 	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '1.2-groovy-2.5'
 }
 
+/*dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}*/
+
+
 docker {
-	name "${project.name}:${project.version}"
+	dependsOn bootJar
+	name "manjunathnb/saree-app:${project.version}"
 	files "build/libs/${bootJar.archiveFileName.get()}"
 	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
 }
@@ -40,10 +53,9 @@ docker {
 
 dockerRun{
 	name "${project.name}"
-	image "${project.name}:${project.version}"
+	image "manjunathnb/saree-app:${project.version}"
 	ports '8081:8081'
 	clean true
 	daemonize false
 }
-
 

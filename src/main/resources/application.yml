@@ -1,0 +1,22 @@
+logging:
+  level:
+    root: info
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"
+server:
+  port: 9292
+
+
+#Name of the application
+spring:
+  application:
+    name: saree-app
+#Eureka server url for registering
+##This is eureka client
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+##register url to server
+#    serviceUrl:
+#      defaultZone: http://saree-gateway-service:80/eureka/

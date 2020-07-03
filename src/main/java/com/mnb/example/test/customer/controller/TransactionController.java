@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("v1/transaction")
 public class TransactionController {
 
     @Autowired
