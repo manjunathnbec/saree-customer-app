@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: saree-app
+  name: saree-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: saree-app
+  template:
+    metadata:
+      labels:
+        app: saree-app
+    spec:
+      containers:
+        -
+          image: "manjunathnb/saree-app:0.0.6-SNAPSHOT"
+          name: saree-app-container
+          ports:
+            -
+              containerPort: 9292

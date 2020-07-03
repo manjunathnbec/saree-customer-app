@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: saree-app-service
+  name: saree-app-service
+spec:
+  ports:
+    -
+      port: 8080
+      targetPort: 9292
+      protocol: TCP
+  selector:
+    app: saree-app
